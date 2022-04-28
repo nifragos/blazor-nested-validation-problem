@@ -1,9 +1,10 @@
 ﻿@page "/form-example-1"
 @using System.ComponentModel.DataAnnotations
+
 <h3>FormExample1</h3>
 
 <EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
-    <CustomValidation @ref="customValidation"/>
+    <CustomValidator @ref="customValidation"/>
     <DataAnnotationsValidator/>
     <ValidationSummary/>
 
