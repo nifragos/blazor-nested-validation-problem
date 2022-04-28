@@ -6,7 +6,6 @@ public class UserVm
 {
     public string Username { get; set; }
 
-    [ValidateComplexType] 
     public AddressVm AddressVm { get; set; } = new AddressVm();
 
 }

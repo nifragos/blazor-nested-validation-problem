@@ -1,0 +1,52 @@
+﻿@page "/form-example-1"
+@using System.ComponentModel.DataAnnotations
+<h3>FormExample1</h3>
+
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
+    <CustomValidation @ref="customValidation"/>
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <InputText id="name" @bind-Value="exampleModel.userName1.userName"/>
+    <InputText id="name" @bind-Value="exampleModel.userName2.userName"/>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private ExampleModel exampleModel = new() {userName1 = new UserTest {userName = "asdfgh"}, userName2 = new UserTest {userName = "hgfdsa"}};
+    private CustomValidator customValidation;
+
+    private void HandleValidSubmit()
+    {
+        customValidation.ClearErrors();
+        var a = exampleModel.userName1.userName;
+        var b = exampleModel.userName2.userName;
+        var errors = new Dictionary<string, List<string>>();
+        if (a == b)
+        {
+            errors.Add(nameof(exampleModel.userName2.userName), new() {"name2 can't be the same as name1"});
+        }
+        
+        if (errors.Any())
+        {
+            customValidation.DisplayErrors(errors);
+        }
+    }
+
+    public class ExampleModel
+    {
+        [Required]
+        public UserTest userName1 { get; set; }
+
+        [Required]
+        public UserTest userName2 { get; set; }
+    }
+
+    public class UserTest
+    {
+        [StringLength(10, ErrorMessage = "Name is too long.")]
+        public string userName { get; set; }
+    }
+
+}
