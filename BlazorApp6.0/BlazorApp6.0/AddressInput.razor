@@ -1,0 +1,10 @@
+﻿<h3>Address Input</h3>
+<InputText @bind-Value="@Vm.Street"/>
+<ValidationMessage For="@(() => Vm.Street)"/>
+
+@code {
+
+    [Parameter]
+    public AddressVm Vm { get; set; } = new();
+    
+}

@@ -1,0 +1,14 @@
+﻿@page "/"
+
+<EditForm Model="@UserVm" OnValidSubmit="@HandleValidSubmit">
+    <CustomValidator @ref="@customValidator"></CustomValidator>
+    <ValidationSummary/>
+    <ObjectGraphDataAnnotationsValidator />
+    
+    <InputText id="username" @bind-Value="@UserVm.Username"/>
+    <ValidationMessage For="@(() => UserVm.Username)"/>
+
+    <AddressInput Vm="UserVm.AddressVm"></AddressInput>
+
+    <button type="submit">save</button>
+</EditForm>
